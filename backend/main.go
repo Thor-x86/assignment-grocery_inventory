@@ -1,3 +1,11 @@
+/***************************************************************************************************
+ * Grocery Inventory Demo
+ * Copyright ⓒ 2026 Athaariq Ardhiansyah
+ *
+ * This program comes with ABSOLUTELY NO WARRANTY and you are welcome to redistribute it under certain
+ * conditions. See LICENSE file.
+ */
+
 package main
 
 import (

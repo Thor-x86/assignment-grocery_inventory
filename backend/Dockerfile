@@ -1,3 +1,9 @@
+# Grocery Inventory Demo
+# Copyright ⓒ 2026 Athaariq Ardhiansyah
+#
+# This program comes with ABSOLUTELY NO WARRANTY and you are welcome to redistribute it under
+# certain conditions. See LICENSE file.
+
 FROM golang:1.27.1-alpine3.24 AS builder
 
 ENV CGO_ENABLED=0
