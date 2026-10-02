@@ -1,0 +1,30 @@
+# Grocery Inventory Demo
+# Copyright ⓒ 2026 Athaariq Ardhiansyah
+#
+# This program comes with ABSOLUTELY NO WARRANTY and you are welcome to redistribute it under
+# certain conditions. See LICENSE file.
+
+services:
+  database:
+    build:
+      context: database
+      network: host
+    container_name: grocery_inventory-database
+    hostname: database.grocery_inventory.internal
+    environment:
+      - POSTGRES_DB=grocery_inventory
+      - POSTGRES_PASSWORD=s8vEGfvyzWfM3g1G # For demonstration purpose
+  load_data:
+    build:
+      context: load_data
+      network: host
+    container_name: grocery_inventory-load_data
+    hostname: load_data.grocery_inventory.internal
+  backend:
+    build:
+      context: backend
+      network: host
+    container_name: grocery_inventory-backend
+    hostname: backend.grocery_inventory.internal
+    ports:
+      - 8000:8000

@@ -1,0 +1,12 @@
+{
+	"editor.formatOnSave": true,
+	"prettier.configPath": ".prettierrc",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[go]": {
+		"editor.defaultFormatter": "golang.go"
+	},
+	"[plaintext]": {
+		"editor.defaultFormatter": null
+	},
+	"editor.rulers": [100]
+}

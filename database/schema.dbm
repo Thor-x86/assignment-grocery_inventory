@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="2.0.0-beta1" use-changelog="false" author="Athaariq Ardhiansyah &lt;foss@athaariq.my.id&gt;" max-obj-count="4"
+	 gen-disabled-objs-code="false" show-sys-schemas-rects="true"
+	 last-position="444,83" last-zoom="1" scene-rect="0,0,1571.94,1076.8"
+	 default-schema="public" default-owner="app"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="app"
+ login="true"
+ password="hWPyWuUgmvfTzPUJ">
+</role>
+
+<database name="grocery_inventory" is-template="false" allow-conns="true" sql-disabled="true">
+	<role name="app"/>
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<usertype name="type_status" configuration="enumeration">
+	<schema name="public"/>
+	<role name="app"/>
+	<enumeration label="unknown"/>
+	<enumeration label="active"/>
+	<enumeration label="backordered"/>
+	<enumeration label="discontinued"/>
+</usertype>
+
+<table name="product" layers="0" collapse-mode="2" max-obj-count="18" z-value="0">
+	<schema name="public"/>
+	<role name="app"/>
+	<position x="580" y="320"/>
+	<column name="id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="supplier_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="warehouse_id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="received_at" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="last_order_at" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="expired_at" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="public.type_status" length="0"/>
+	</column>
+	<column name="unit_price_usd" not-null="true">
+		<type name="float4" length="0"/>
+	</column>
+	<column name="percentage" not-null="true">
+		<type name="float4" length="0"/>
+	</column>
+	<column name="stock_qty" not-null="true">
+		<type name="int2" length="0"/>
+	</column>
+	<column name="reorder_level" not-null="true">
+		<type name="int2" length="0"/>
+	</column>
+	<column name="reorder_qty" not-null="true">
+		<type name="int2" length="0"/>
+	</column>
+	<column name="sales_volume" not-null="true">
+		<type name="int2" length="0"/>
+	</column>
+	<column name="inventory_turnover_ratio" not-null="true">
+		<type name="int2" length="0"/>
+	</column>
+	<constraint name="product_pk" type="pk-constr" table="public.product">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="supplier" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="app"/>
+	<position x="80" y="480"/>
+	<column name="id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="32"/>
+	</column>
+	<constraint name="supplier_pk" type="pk-constr" table="public.supplier">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="warehouse" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="app"/>
+	<position x="1240" y="480"/>
+	<column name="id" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="int4" length="0"/>
+	</column>
+	<constraint name="warehouse_pk" type="pk-constr" table="public.warehouse">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_warehouse_name" type="uq-constr" table="public.warehouse">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="idx_product_reorder_best" table="public.product"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="true" nulls-first="false" asc-order="false">
+			<column name="reorder_level"/>
+		</idxelement>
+	<predicate> <![CDATA[status = 'active']]> </predicate>
+</index>
+
+<index name="idx_product_reorder_worst" table="public.product"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="true" nulls-first="false" asc-order="true">
+			<column name="reorder_level"/>
+		</idxelement>
+	<predicate> <![CDATA[status = 'active']]> </predicate>
+</index>
+
+<index name="idx_product_reorder_best_by_warehouse" table="public.product"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="true" nulls-first="false" asc-order="true">
+			<column name="warehouse_id"/>
+		</idxelement>
+		<idxelement use-sorting="true" nulls-first="false" asc-order="false">
+			<column name="reorder_level"/>
+		</idxelement>
+	<predicate> <![CDATA[status = 'active']]> </predicate>
+</index>
+
+<index name="idx_product_reorder_worst_by_warehouse" table="public.product"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="0">
+		<idxelement use-sorting="true" nulls-first="false" asc-order="true">
+			<column name="warehouse_id"/>
+		</idxelement>
+		<idxelement use-sorting="true" nulls-first="false" asc-order="true">
+			<column name="reorder_level"/>
+		</idxelement>
+	<predicate> <![CDATA[status = 'active']]> </predicate>
+</index>
+
+<constraint name="fk_product_supplier_id" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.supplier" table="public.product">
+	<columns names="supplier_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_product_warehouse_id" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="RESTRICT" del-action="RESTRICT" ref-table="public.warehouse" table="public.product">
+	<columns names="warehouse_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_product_supplier" type="relfk" layers="0"
+	 src-table="public.product"
+	 dst-table="public.supplier" reference-fk="fk_product_supplier_id"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="-3.21238" y="-29.953"/>
+	</label>
+</relationship>
+
+<relationship name="rel_product_warehouse" type="relfk" layers="0"
+	 src-table="public.product"
+	 dst-table="public.warehouse" reference-fk="fk_product_warehouse_id"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="-6.69081" y="-21.953"/>
+	</label>
+</relationship>
+
+</dbmodel>

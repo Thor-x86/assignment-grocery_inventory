@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"EditorConfig.EditorConfig",
+		"golang.go",
+		"docker.docker",
+		"ms-python.python",
+		"ms-python.debugpy",
+		"ms-python.vscode-pylance"
+	]
+}
