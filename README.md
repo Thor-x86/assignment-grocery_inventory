@@ -1,4 +1,4 @@
-# Grocery Inventory REST API for Business Intelligence assignment
+# Grocery Inventory Demo for Business Intelligence assignment
 
 Dataset source: https://www.kaggle.com/datasets/willianoliveiragibin/grocery-inventory
 
@@ -6,12 +6,13 @@ Required programs:
 
 - [Docker](https://www.docker.com/get-started/)
 - [docker-compose](https://docs.docker.com/compose/install/)
+- Your favourite modern browser (Chrome/Firefox/Safari/Edge)
 
 ## How to use
 
 1. Open terminal in this directory (or folder in Windows)
 2. Enter: `docker-compose up`
-3. Open this on browser: http://localhost:8000/best_sales
+3. Open this on browser: http://localhost:8080
 
 ## Backend Endpoints
 

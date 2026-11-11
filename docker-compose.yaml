@@ -28,3 +28,11 @@ services:
     hostname: backend.grocery_inventory.internal
     ports:
       - 8000:8000
+  frontend:
+    build:
+      context: frontend
+      network: host
+    container_name: grocery_inventory-frontend
+    hostname: frontend.grocery_inventory.internal
+    ports:
+      - 8080:80

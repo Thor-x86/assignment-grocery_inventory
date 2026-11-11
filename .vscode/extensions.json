@@ -6,6 +6,7 @@
 		"docker.docker",
 		"ms-python.python",
 		"ms-python.debugpy",
-		"ms-python.vscode-pylance"
+		"ms-python.vscode-pylance",
+		"oxc.oxc-vscode"
 	]
 }
